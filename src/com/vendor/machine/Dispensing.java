@@ -29,6 +29,7 @@ public class Dispensing implements VendorMachineState {
 		Item item = vendorMachine.collectItem();
 		List<Coin> coins = vendorMachine.collectCoin();
 		itemMap.put(item, coins);
+		vendorMachine.setCoinNotInserted(vendorMachine.getCoinNotInserted());
 		return itemMap;
 	}
 }

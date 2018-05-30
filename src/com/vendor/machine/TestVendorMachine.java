@@ -29,5 +29,27 @@ class TestVendorMachine {
 		testMap.put(Item.COKE, chnageCoinList);
 		assertThat(testMap, is(map));
 	}
+	
+	@Test
+	public void testNotFullPaid() {
+		Assertions.assertThrows(NotFullPaidException.class, ()->{
+			VendorMachine vendorMachine = new VendorMachine();
+			vendorMachine.insertCoin(10);
+			vendorMachine.selectItemAndGetPrice(Item.COKE);
+			vendorMachine.collectItemAndGetChange();
+		});
+	}
+	
+	@Test
+	public void testSoldOutException() {
+		Assertions.assertThrows(SoldOutException.class, ()->{
+			VendorMachine vendorMachine = new VendorMachine();
+			for(int i = 0 ; i < 6 ; i++) {
+			vendorMachine.insertCoin(45);
+			vendorMachine.selectItemAndGetPrice(Item.COKE);
+			vendorMachine.collectItemAndGetChange();
+			}
+		});
+	}
 
 }
